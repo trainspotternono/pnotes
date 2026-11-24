@@ -1,9 +1,11 @@
 # pNotes
 
-> Eigenständige Variante von RailPaper – funktional identisch, eigener Name und eigenes Color Kit (ohne #FFFFFF).
-> Läuft parallel zu RailPaper: eigene App-ID (`local.pnotes.app`), eigener Datenordner `%APPDATA%\pNotes`,
-> eigener Installationsordner, eigene Verknüpfung, eigener Standard-Sync-Ordner `/pNotes-Sync`.
-> `.noahpalle`-Dateien haben dieselbe Formatkennung wie in RailPaper und lassen sich in beiden Programmen öffnen.
+> Dieses Programm stellt eine kostenlose Alternative zum kommerziellen Programm "GoodNotes" dar.
+> Mich hat persönlich gestört, dass in GoodNotes for Windows alles langsam war aufgrund der Webapp.
+> Dann habe ich mithilfe Claude Code dieses Programm schreiben lassen.
+> Ich bin kein Softwareentwickler, viel mehr ein Hardware-Guru mit Tendenzen zum nerdigen Eisenbahnwesen.
+> Eventuell hilft dieses Programm Studenten, ihre Dokumente auf Windows mit einem gescheiten Programm zu schreiben.
+> Eine Synchronisation mit den bekanntesten Cloud-Diensten und Nextcloud ist möglich.
 
 Lokale Notiz-App für Windows (Electron + React + TypeScript, SVG-Papiervorlagen, Canvas-Stift-Engine).
 Kein Konto nötig: Alles liegt als JSON in `%APPDATA%\pNotes\library\`, Synchronisierung ist optional.
