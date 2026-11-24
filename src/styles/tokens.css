@@ -1,0 +1,140 @@
+/*
+ * pNotes Design-Tokens – pNotes Color Kit (strikt ohne Weiß #FFFFFF).
+ * Crimson als Primärakzent (+ Dark für Hover/Active), sieben Slate-Töne für Flächen, Linien und Text.
+ * Alle Theme-Tokens (Flächen, Text, Linien, Akzente) für Hell und Dunkel leiten sich davon ab.
+ * Kontraste (WCAG): Slate 900 auf Slate 100 17:1 · Slate 700 auf Slate 100 11:1 · Slate 500 auf Slate 100 4,3:1 ·
+ * Crimson auf Slate 100 4,6:1 · Slate 100 auf Crimson 4,6:1 · Slate 100 auf Slate 800 14:1 · Slate 300 auf Slate 800 9:1.
+ */
+:root {
+  /* ---------- pNotes Color Kit */
+  --pnotes-crimson: #d92632;       /* Primärakzent */
+  --pnotes-crimson-dark: #a81b25;  /* Primärakzent Hover/Active */
+  --pnotes-slate-100: #f2f3f5;     /* hellster Flächen-/Papier-Ton (Light) */
+  --pnotes-slate-200: #e1e4e8;     /* Toolbar/Sidebar (Light) */
+  --pnotes-slate-300: #c5cbd3;     /* Rahmen/Trennlinien (Light) */
+  --pnotes-slate-500: #6e7781;     /* Sekundärtext / Icons */
+  --pnotes-slate-700: #32383f;     /* Karten/Dropdowns (Dark) */
+  --pnotes-slate-800: #1f242a;     /* Toolbar/Sidebar (Dark) */
+  --pnotes-slate-900: #12161a;     /* App-Hintergrund (Dark) */
+  /* RGB-Tripel für Transparenzen: rgba(var(--pnotes-slate-900-rgb), 0.2) */
+  --pnotes-crimson-rgb: 217, 38, 50;
+  --pnotes-crimson-dark-rgb: 168, 27, 37;
+  --pnotes-slate-100-rgb: 242, 243, 245;
+  --pnotes-slate-300-rgb: 197, 203, 211;
+  --pnotes-slate-500-rgb: 110, 119, 129;
+  --pnotes-slate-900-rgb: 18, 22, 26;
+
+  color-scheme: light;
+
+  /* Hintergründe */
+  --bg-base: var(--pnotes-slate-300);         /* App-Hintergrund hinter Seiten (Seiten = Slate 100) */
+  --bg-chrome: var(--pnotes-slate-200);       /* Titel-/Werkzeugleisten (= Windows-Titlebar-Overlay) */
+  --bg-layer: var(--pnotes-slate-100);        /* Karten, Panels, Dialoge */
+  --bg-layer-2: var(--pnotes-slate-200);      /* Sekundärflächen */
+  --bg-sidebar: var(--pnotes-slate-200);
+  --bg-overlay: rgba(var(--pnotes-slate-900-rgb), 0.42);
+
+  /* Flächen */
+  --fill-1: rgba(var(--pnotes-slate-900-rgb), 0.72);
+  --fill-2: rgba(var(--pnotes-slate-500-rgb), 0.22);
+  --fill-3: rgba(var(--pnotes-slate-500-rgb), 0.12);
+  --fill-hover: rgba(var(--pnotes-slate-500-rgb), 0.14);
+  --fill-pressed: rgba(var(--pnotes-slate-500-rgb), 0.24);
+  --fill-selected: rgba(var(--pnotes-crimson-rgb), 0.1);
+
+  /* Aktion / Status */
+  --accent: var(--pnotes-crimson);
+  --accent-hover: var(--pnotes-crimson-dark);
+  --accent-tint: rgba(var(--pnotes-crimson-rgb), 0.1);
+  --accent-label: var(--pnotes-slate-100);
+  --positive: var(--pnotes-slate-800);
+  --danger: var(--pnotes-crimson);
+  --danger-tint: rgba(var(--pnotes-crimson-rgb), 0.1);
+  --attention: var(--pnotes-crimson);
+
+  /* Text */
+  --label-1: var(--pnotes-slate-900);
+  --label-2: var(--pnotes-slate-700);
+  --label-3: var(--pnotes-slate-500);
+  --label-on-accent: var(--pnotes-slate-100);
+
+  /* Linien & Schatten */
+  --border: var(--pnotes-slate-300);
+  --border-subtle: var(--pnotes-slate-200);
+  --shadow-1: 0 1px 2px rgba(var(--pnotes-slate-900-rgb), 0.1), 0 1px 1px rgba(var(--pnotes-slate-900-rgb), 0.05);
+  --shadow-2: 0 4px 14px rgba(var(--pnotes-slate-900-rgb), 0.14), 0 1px 3px rgba(var(--pnotes-slate-900-rgb), 0.08);
+  --shadow-3: 0 18px 48px rgba(var(--pnotes-slate-900-rgb), 0.24), 0 4px 12px rgba(var(--pnotes-slate-900-rgb), 0.1);
+  --page-shadow: 0 1px 3px rgba(var(--pnotes-slate-900-rgb), 0.16), 0 6px 20px rgba(var(--pnotes-slate-900-rgb), 0.08);
+
+  /* Werkzeugleiste */
+  --toolbar-item-active: var(--pnotes-slate-100);
+  --toolbar-group-active: rgba(var(--pnotes-crimson-rgb), 0.14);
+  --toolbar-label-active: var(--accent);
+
+  /* Typografie (Skala aus der Spec, §1.4) */
+  --font-ui: 'Segoe UI Variable Text', 'Segoe UI Variable', 'Segoe UI', system-ui, sans-serif;
+  --font-display: 'Segoe UI Variable Display', 'Segoe UI Variable', 'Segoe UI', system-ui, sans-serif;
+  --text-heading-l: 600 32px/40px var(--font-display);
+  --text-heading-m: 600 24px/28px var(--font-display);
+  --text-heading-s: 600 20px/24px var(--font-display);
+  --text-body-l: 400 16px/22px var(--font-ui);
+  --text-body: 400 14px/20px var(--font-ui);
+  --text-label: 500 14px/20px var(--font-ui);
+  --text-caption: 400 12px/16px var(--font-ui);
+  --text-caption-strong: 600 12px/16px var(--font-ui);
+
+  /* Raster & Radien */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+  --radius-s: 6px;
+  --radius-m: 10px;
+  --radius-l: 14px;
+  --radius-pill: 999px;
+
+  --titlebar-h: 44px;
+  --titlebar-controls-w: 140px;
+  --sidebar-w: 248px;
+}
+
+:root[data-theme='dark'] {
+  color-scheme: dark;
+  --bg-base: var(--pnotes-slate-900);
+  --bg-chrome: var(--pnotes-slate-800);
+  --bg-layer: var(--pnotes-slate-700);        /* Karten/Dropdowns */
+  --bg-layer-2: var(--pnotes-slate-900);
+  --bg-sidebar: var(--pnotes-slate-800);
+  --bg-overlay: rgba(var(--pnotes-slate-900-rgb), 0.66);
+
+  --fill-1: rgba(var(--pnotes-slate-100-rgb), 0.82);
+  --fill-2: rgba(var(--pnotes-slate-100-rgb), 0.12);
+  --fill-3: rgba(var(--pnotes-slate-100-rgb), 0.06);
+  --fill-hover: rgba(var(--pnotes-slate-100-rgb), 0.08);
+  --fill-pressed: rgba(var(--pnotes-slate-100-rgb), 0.14);
+  --fill-selected: rgba(var(--pnotes-crimson-rgb), 0.2);
+
+  --accent: var(--pnotes-crimson);
+  --accent-hover: var(--pnotes-crimson-dark);
+  --accent-tint: rgba(var(--pnotes-crimson-rgb), 0.2);
+  --accent-label: var(--pnotes-slate-100);
+  --positive: var(--pnotes-slate-200);
+  --danger: var(--pnotes-crimson);
+  --danger-tint: rgba(var(--pnotes-crimson-rgb), 0.2);
+
+  --label-1: var(--pnotes-slate-100);
+  --label-2: var(--pnotes-slate-300);
+  --label-3: var(--pnotes-slate-500);
+
+  --border: rgba(var(--pnotes-slate-300-rgb), 0.22);
+  --border-subtle: rgba(var(--pnotes-slate-100-rgb), 0.1);
+  --shadow-1: 0 1px 2px rgba(var(--pnotes-slate-900-rgb), 0.5);
+  --shadow-2: 0 4px 14px rgba(var(--pnotes-slate-900-rgb), 0.55);
+  --shadow-3: 0 18px 48px rgba(var(--pnotes-slate-900-rgb), 0.7);
+  --page-shadow: 0 1px 3px rgba(var(--pnotes-slate-900-rgb), 0.6), 0 6px 20px rgba(var(--pnotes-slate-900-rgb), 0.4);
+
+  --toolbar-item-active: var(--pnotes-slate-700);
+  --toolbar-group-active: rgba(var(--pnotes-crimson-rgb), 0.22);
+}

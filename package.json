@@ -1,0 +1,118 @@
+{
+  "name": "pnotes",
+  "productName": "pNotes",
+  "version": "0.1.0",
+  "private": true,
+  "description": "pNotes – lokale Notiz-App für Windows (Bibliothek, Notizbücher, Stift-Engine)",
+  "author": "pNotes",
+  "license": "MIT",
+  "main": "dist-electron/electron/main.js",
+  "scripts": {
+    "setup": "install-electron",
+    "preview:browser": "vite build && vite preview --host 127.0.0.1",
+    "dev": "concurrently -k -n vite,electron -c blue,magenta \"vite\" \"npm:dev:electron\"",
+    "dev:electron": "tsc -p tsconfig.electron.json && wait-on tcp:127.0.0.1:5173 && electron . --dev-server=http://127.0.0.1:5173",
+    "typecheck": "tsc -p tsconfig.json --noEmit && tsc -p tsconfig.electron.json --noEmit",
+    "build": "npm run typecheck && vite build && tsc -p tsconfig.electron.json",
+    "start": "electron .",
+    "test": "vitest run",
+    "smoke": "electron . --smoke",
+    "check": "npm run build && npm test && npm run smoke",
+    "webdav:mock": "tsc -p tsconfig.electron.json && node dist-electron/electron/sync/mock-server.js",
+    "test-pdf": "tsc -p tsconfig.electron.json && node dist-electron/electron/testPdf.js release/pNotes-Testdokument.pdf",
+    "dist": "npm run build && electron-builder --win --x64",
+    "dist:portable": "npm run build && electron-builder --win portable --x64",
+    "dist:setup": "npm run build && electron-builder --win nsis --x64",
+    "assets": "electron scripts/make-installer-assets.js build"
+  },
+  "build": {
+    "appId": "local.pnotes.app",
+    "productName": "pNotes",
+    "directories": {
+      "output": "release",
+      "buildResources": "build"
+    },
+    "files": [
+      "dist/**",
+      "!dist/**/*.map",
+      "dist-electron/**",
+      "package.json"
+    ],
+    "asar": true,
+    "win": {
+      "target": [
+        {
+          "target": "portable",
+          "arch": [
+            "x64"
+          ]
+        },
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        }
+      ],
+      "artifactName": "pNotes-${version}-portable.${ext}",
+      "icon": "build/icon.ico"
+    },
+    "copyright": "© 2026 pNotes",
+    "portable": {
+      "artifactName": "pNotes-${version}-portable.${ext}"
+    },
+    "nsis": {
+      "artifactName": "pNotes-${version}-Setup.${ext}",
+      "oneClick": false,
+      "perMachine": false,
+      "allowElevation": true,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "pNotes",
+      "uninstallDisplayName": "pNotes",
+      "installerIcon": "build/icon.ico",
+      "uninstallerIcon": "build/icon.ico",
+      "installerHeaderIcon": "build/icon.ico",
+      "installerSidebar": "build/installerSidebar.bmp",
+      "uninstallerSidebar": "build/installerSidebar.bmp",
+      "installerLanguages": [
+        "de_DE",
+        "en_US"
+      ],
+      "multiLanguageInstaller": true,
+      "displayLanguageSelector": false,
+      "runAfterFinish": true,
+      "deleteAppDataOnUninstall": false,
+      "include": "build/installer.nsh"
+    },
+    "fileAssociations": [
+      {
+        "ext": "pnotes",
+        "name": "pNotes.Dokument",
+        "description": "pNotes-Dokument",
+        "mimeType": "application/vnd.pnotes.document+zip",
+        "role": "Editor"
+      }
+    ]
+  },
+  "devDependencies": {
+    "@types/node": "^22.20.5",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "@vitejs/plugin-react": "^5.2.0",
+    "concurrently": "^9.2.5",
+    "electron": "^45.4.1",
+    "electron-builder": "^26.18.0",
+    "fflate": "^0.8.2",
+    "lucide-react": "^0.577.0",
+    "pdf-lib": "^1.17.1",
+    "pdfjs-dist": "^5.7.284",
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1",
+    "typescript": "^5.9.3",
+    "vite": "^7.3.8",
+    "vitest": "^3.2.7",
+    "wait-on": "^8.0.5"
+  }
+}

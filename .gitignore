@@ -1,0 +1,7 @@
+node_modules/
+dist/
+dist-electron/
+smoke-output/
+public/pdfjs/
+release/
+*.tmp
