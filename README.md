@@ -18,7 +18,7 @@ Fertige Programme gibt es unter **[Releases](../../releases)**:
 
 | Datei | Wofür |
 |---|---|
-| `pNotes-<Version>-Setup.exe` | Installer (Startmenü, Desktop-Verknüpfung, Doppelklick auf `.pnotes`/`.noahpalle`) |
+| `pNotes-<Version>-Setup.exe` | Installer (Startmenü, Desktop-Verknüpfung, Doppelklick auf `.pnotes`) |
 | `pNotes-<Version>-portable.exe` | Ohne Installation starten, z. B. vom USB-Stick |
 
 **Hinweis Windows SmartScreen:** Die EXE ist nicht signiert. Beim ersten Start erscheint „Der Computer wurde durch Windows geschützt“ → **„Weitere Informationen“** → **„Trotzdem ausführen“**.
@@ -45,7 +45,7 @@ npm run setup      # lädt das Electron-Binary (npm 11 führt Install-Skripte ni
 | `npm run build` then `npm start` | Gebaute App starten |
 | `npm run dev` | Entwicklung mit Hot Reload (Vite + Electron) |
 | `npm run preview:browser` | Nur UI im Browser (http://127.0.0.1:4173, speichert in localStorage) |
-| `npm run dist` | `release\pNotes-0.1.0-portable.exe` + `release\pNotes-0.1.0-Setup.exe` (Installer mit `.noahpalle`-Dateizuordnung) |
+| `npm run dist` | `release\pNotes-0.1.0-portable.exe` + `release\pNotes-0.1.0-Setup.exe` |
 | `npm run dist:portable` | Nur die Portable-EXE |
 
 ## Prüfen
@@ -83,7 +83,7 @@ npm run setup      # lädt das Electron-Binary (npm 11 führt Install-Skripte ni
 - **Seiten drehen:** „Drehen“ oben in der Titelleiste (Taste R) oder Seitenmenü → „Seite drehen“; 90°-Schritte im Uhrzeigersinn, pro Seite gespeichert. Striche, Formen, Texte, Haftnotizen, Bilder und Kommentar-Pins werden in die neue Lage umgerechnet, der Hintergrund (Vorlage/PDF) wird mitgedreht – Stift und Pointer treffen danach exakt.
 - **Einbetten / Eingravieren:** Auswahl → „Handschrift eingravieren“ / „Text einbetten“ / „Eingravieren“ (bzw. beim Texteditieren „Text einbetten“ in der Werkzeugleiste). Eingravierte Elemente gehören zur Seite: nicht mehr auswähl-, verschieb- oder radierbar; entfernen nur über Rückgängig oder „Seite leeren“.
 - **Seitenverwaltung:** Seitenleiste (Seiten-Symbol oben links) mit Vorschau aller Seiten; Klick springt, Ziehen sortiert um, Rechtsklick/„…“: davor/danach einfügen, duplizieren (inkl. Kommentaren), **kopieren / kopierte Seite einfügen** (auch in ein anderes Notizbuch), drehen, verschieben, Vorlage (Blanko/Liniert/Kariert/Punkt/**PDF**), leeren, löschen.
-- **Exportieren:** „Exportieren“ oben rechts (Strg+E) → **PDF** (Original-PDF-Seiten bleiben vektoriell; optional Haftnotizen und Kommentare mit Pins + Kommentarliste), **PNG** (aktuelle oder alle Seiten, 72/144/216 dpi) oder **.noahpalle**.
+- **Exportieren:** „Exportieren“ oben rechts (Strg+E) → **PDF** (Original-PDF-Seiten bleiben vektoriell; optional Haftnotizen und Kommentare mit Pins + Kommentarliste), **PNG** (aktuelle oder alle Seiten, 72/144/216 dpi).
 - **Datenmodell:** `pages[].strokes` (inkl. `dash`/`dashArray`, `engraved`), `pages[].objects` (Formen, Textboxen, Haftnotizen = Text mit `sticky`, Bilder/GIFs als Data-URL mit Zuschnitt und `animated`), `pages[].comments` (Threads mit Nachrichten), `pages[].rotation` (0/90/180/270), `pages[].hiddenPdf` – alles Teil von Undo/Redo, Autosave und Nextcloud-Sync.
 
 ## Sprache
@@ -110,13 +110,6 @@ Getestet für IR-Multi-Touch-Displays (z. B. iiyama ProLite TE8615A-B2AG, 40 Pun
 - **Touch-Monitor** (Strg+Umschalt+D oder Schalter im Touch-Menü): live `pointerId`, `pointerType`, `width × height`, Druck, Bildschirm- und Seitenkoordinaten, erkannte Spitze, Display-Hälfte, benutztes Werkzeug, Ereignisrate, Protokoll; Ringe in Kontaktgröße. Warnt, wenn das Gerät keine Kontaktgröße meldet.
 - **Große Bedienelemente:** vergrößert Werkzeugleiste, Titelleiste, Seitenleiste und Auswahlleiste.
 
-## Format `.noahpalle`
-
-ZIP-Container: `mimetype` (`application/vnd.papierwerk.noahpalle+zip`, erster Eintrag, unkomprimiert), `manifest.json` (Format + `formatVersion`, Generator, Metadaten, Asset-Liste mit SHA-1), `document.json` (alle Seiten), `assets/pdf/<sha1>.pdf`, `assets/images/<sha1>.<ext>` (Bilder/GIFs unverändert), `preview.png`. Neuere Formatversionen werden mit Hinweis abgelehnt.
-
-- **Exportieren:** im Editor „Exportieren“ → „.noahpalle“ oder in der Bibliothek Rechtsklick auf ein Notizbuch → „Als .noahpalle exportieren …“.
-- **Öffnen:** Bibliothek → „Neu“ → „Dokument öffnen (.noahpalle) …“ (Strg+O), Datei auf die Bibliothek ziehen, oder **Doppelklick im Explorer** – mit dem Installer automatisch; bei der Portable-EXE einmal „Neu“ → „Doppelklick auf .noahpalle aktivieren“ (Zuordnung für den aktuellen Windows-Benutzer, ohne Adminrechte). Läuft pNotes schon, öffnet sich die Datei im laufenden Fenster. Geöffnete Dokumente werden als neues Notizbuch übernommen.
-
 ## Ordner
 
 Seitenleiste „Ordner“: „+“ = neuer Ordner; Rechtsklick/„…“ auf einen Ordner: Öffnen, Neuer Unterordner, Umbenennen, Farbe (26 Vorgaben + eigene Farbe), Bewegen, Löschen (Papierkorb). Notizbücher und Ordner per Drag & Drop auf einen Ordner (Seitenleiste oder Karte) oder auf „Dokumente“ ziehen = verschieben.
@@ -134,7 +127,6 @@ Seitenleiste „Ordner“: „+“ = neuer Ordner; Rechtsklick/„…“ auf ein
 
 ```powershell
 npm run dist        # → release\pNotes-0.1.0-portable.exe (Portable, x64, ohne Installation)
-                    #   release\pNotes-0.1.0-Setup.exe    (Installer, registriert .noahpalle für Doppelklick)
 npm run test-pdf    # → release\pNotes-Testdokument.pdf (3 Seiten, verschiedene Formate)
 ```
 
@@ -176,7 +168,7 @@ src/ink/    geometry.ts (Druck, Glättung, Strichmuster), shapes.ts (Formenerken
 
 - **Synchronisierung** (Seitenleiste → „Synchronisierung“): Nextcloud (SSO/App-Passwort), **Google Drive** (Ordner von „Google Drive für Desktop“, z. B. `G:\Meine Ablage`), **iCloud Drive** (`%USERPROFILE%\iCloudDrive` von „iCloud für Windows“), **eigener Ordner** (OneDrive, Dropbox, NAS, USB) oder **eigener WebDAV-Server**. Cloud-Ordner werden automatisch gefunden. Ablage im Unterordner `pNotes-Sync`; Konflikterkennung über Änderungszeit/Größe, atomares Schreiben (`electron/sync/folder.ts`).
 - **Papierformate:** A3, A4, A5, A6, B4, B5, Letter, Legal, Tabloid, Executive, Statement (hoch/quer). PDF-Import in jeder Seitengröße; das Notizbuch erhält das nächstliegende Format.
-- **Dokumentformat:** pNotes speichert `.pnotes` (`application/vnd.pnotes.document+zip`) und öffnet zusätzlich `.noahpalle` aus RailPaper. App-spezifische Kennungen stehen in `shared/brand.ts`.
+- **Dokumentformat:** pNotes speichert `.pnotes` (`application/vnd.pnotes.document+zip`). App-spezifische Kennungen stehen in `shared/brand.ts`.
 - **Installer:** `npm run dist` → `release\pNotes-0.1.0-Setup.exe` (Deutsch/Englisch, Installationsort wählbar, Startmenü + Desktop, `.pnotes`-Zuordnung, Deinstallation über „Apps“, Notizen bleiben erhalten) und `release\pNotes-0.1.0-portable.exe`. Grafiken: `npm run assets` (erzeugt `build\icon.ico`, `build\installerSidebar.bmp`); Deinstallations-Ergänzung in `build\installer.nsh`.
 
 ## Lizenz
